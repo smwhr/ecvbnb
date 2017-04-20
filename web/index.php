@@ -24,9 +24,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="column large-6">
+    <div class="column large-6 validate-wrapper">
       <ng-map zoom="2">
+      <a class="button validate-answer" 
+          ng-click="ctrl.validateAnswer()"
+      >Valider</a>
     </div>
+  </div>
+  <div class="row">
+    <div class="column large-12">{{ctrl.chaleur}}</div>
   </div>
 
 </div>

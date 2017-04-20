@@ -1,1 +1,3 @@
 ng-map{display:block;height: 400px;}
+.validate-wrapper{position:relative;padding-top: 20px;}
+.validate-answer{position:absolute;top:23px;right:18px;z-index:1000;}
