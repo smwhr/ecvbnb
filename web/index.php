@@ -17,8 +17,8 @@
 
 <div class="container" ng-controller="GameController as ctrl">
   <div class="row">
-    <div class="column large-3"
-         ng-repeat="picture_url in ctrl.listing.picture_urls">
+    <div class="column large-3 medium-3"
+         ng-repeat="picture_url in ctrl.listing.picture_urls | limitTo:4">
          <img ng-src="{{picture_url}}" />
       
     </div>
@@ -33,6 +33,9 @@
   </div>
   <div class="row">
     <div class="column large-12">{{ctrl.chaleur}}</div>
+    <a class="button" 
+          ng-click="ctrl.randomListing()"
+      >Changer</a>
   </div>
 
 </div>

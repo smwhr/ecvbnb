@@ -6,6 +6,7 @@ app.controller('GameController',
     function($scope, $http, $map, $q){
   
     var ctrl= this;
+    ctrl.listings= null;
     ctrl.listing = null;
     ctrl.map     = null;
     ctrl.marker = null;
@@ -17,9 +18,9 @@ app.controller('GameController',
     
     // LOADING
 
-    var promListing = $http.get("/data/listing.json");
+    var promListing = $http.get("/data/search_results.json");
     promListing.then(function(response){
-      ctrl.listing = response.data.results[0].listing;
+      ctrl.listings = response.data.search_results;
     });
 
     var promMap = $map.getMap();
@@ -36,6 +37,7 @@ app.controller('GameController',
     $q.all([promListing, promMap])
       .then(function(){
                 console.log("everything is loaded !");
+                ctrl.randomListing()
         }, function(){
                 console.error("OOPS !")
             });
@@ -49,6 +51,11 @@ app.controller('GameController',
 
     // GAME FUNCTION
 
+    ctrl.randomListing = function(){
+      var rand = Math.floor(Math.random()*ctrl.listings.length)
+      ctrl.listing = ctrl.listings[rand].listing;
+    }
+
     ctrl.validateAnswer = function(){
       var listing_position = new google.maps.LatLng(
                   {"lat" : ctrl.listing.lat,
@@ -61,6 +68,9 @@ app.controller('GameController',
                           ctrl.guess,
                           listing_position
                         )/1000;
+      if(dist < 5){
+        alert("gagné !"); return;
+      }
       if (dist > ctrl.last_dist){
         ctrl.chaleur = "Froid";
       }else{
