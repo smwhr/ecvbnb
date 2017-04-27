@@ -21,7 +21,7 @@ app.config(['$routeProvider', function($routeProvider){
 
 app.controller('FrontController', 
   ['$scope', '$http', 
-    function($scope, $http,){
+    function($scope, $http){
 
 }]);
 
@@ -29,7 +29,7 @@ app.controller('SingleController',
   ['$scope', '$http', '$routeParams',
     function($scope, $http, $routeParams){
       var ctrl= this;
-      
+
       ctrl.listing_index = $routeParams.id;
       ctrl.listing = null;
 
