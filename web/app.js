@@ -28,6 +28,8 @@ app.controller('FrontController',
 app.controller('SingleController', 
   ['$scope', '$http', '$routeParams',
     function($scope, $http, $routeParams){
+      var ctrl= this;
+      
       ctrl.listing_index = $routeParams.id;
       ctrl.listing = null;
 
