@@ -47,6 +47,10 @@ app.controller('SingleController',
       promListing.then(function(response){
           ctrl.listing = response.data.search_results[ctrl.listing_index].listing;
       });
+
+      ctrl.doSomething = function(data){
+        alert(data);
+      }
 }]);
 
 app.controller('GameController', 
@@ -129,4 +133,30 @@ app.controller('GameController',
       ctrl.chaleur += " ("+dist.toFixed(2)+")"
       ctrl.last_dist = dist;
     }
+}]);
+
+
+app.directive('landlord', ['$http', function($http){
+  return {
+    restrict: 'EA',
+    scope:{
+      listing:'=listing',
+      onClick: '&handler'
+    },
+    templateUrl: 'templates/landlord.html',
+    link: function($scope, element, attrs){
+        $scope.showId = function(data){
+          $scope.onClick(data);
+        }
+
+        $scope.$watch("listing",function(newValue,oldValue) {
+          if(newValue === null) return;
+          $scope.landlord = {
+            'name' : $scope.listing.primary_host.first_name,
+            'picture': $scope.listing.primary_host.picture_url,
+            'id': $scope.listing.primary_host.id
+          } 
+        });
+    }
+  }
 }]);
