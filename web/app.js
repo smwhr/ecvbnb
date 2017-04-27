@@ -5,24 +5,34 @@ app.config(['$routeProvider', function($routeProvider){
   when('/', {
         templateUrl: 'templates/index.html',
         controller: "FrontController",
-        controllerAs: 'ctrl'
+        controllerAs: 'ctrl',
+        activetab: 'home',
     }).
     when('/game', {
         templateUrl: 'templates/game.html',
         controller: "GameController",
-        controllerAs: 'ctrl'
+        controllerAs: 'ctrl',
+        activetab: 'game',
     }).
     when('/listing/:id', {
         templateUrl: 'templates/single.html',
         controller: "SingleController",
-        controllerAs: 'ctrl'
+        controllerAs: 'ctrl',
+        activetab: 'listing'
     })
+}]);
+
+app.run(['$rootScope', '$route', function($rootScope, $route) {
+  $rootScope.$route = $route;
+  $rootScope.$on('$routeChangeSuccess', function() {
+    // analytics
+    ga('send', 'pageview');
+  });
 }]);
 
 app.controller('FrontController', 
   ['$scope', '$http', 
     function($scope, $http){
-
 }]);
 
 app.controller('SingleController', 
@@ -42,7 +52,7 @@ app.controller('SingleController',
 app.controller('GameController', 
   ['$scope', '$http', 'NgMap', '$q', 
     function($scope, $http, $map, $q){
-  
+
     var ctrl= this;
     ctrl.listings= null;
     ctrl.listing = null;
