@@ -20,7 +20,7 @@
   <div class="top-bar">
   <div class="top-bar-left">
     <ul class="menu">
-      <li class="menu-text">Site Title</li>
+      <li class="menu-text">ECVBnBGame</li>
       <li  class="active"><a href="#!/">Home</a></li>
       <li><a href="#!/game">Game</a></li>
       <li>Listing</li>
