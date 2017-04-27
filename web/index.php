@@ -21,7 +21,9 @@
   <div class="top-bar-left">
     <ul class="menu">
       <li class="menu-text">Site Title</li>
-      <li><a href="#!/">Home</a>
+      <li  class="active"><a href="#!/">Home</a></li>
+      <li><a href="#!/game">Game</a></li>
+      <li>Listing</li>
     </ul>
   </div>
 </div>
