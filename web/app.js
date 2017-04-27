@@ -12,16 +12,29 @@ app.config(['$routeProvider', function($routeProvider){
         controller: "GameController",
         controllerAs: 'ctrl'
     }).
-    when('/listing/{id}', {
+    when('/listing/:id', {
         templateUrl: 'templates/single.html',
         controller: "SingleController",
         controllerAs: 'ctrl'
     })
 }]);
+
 app.controller('FrontController', 
   ['$scope', '$http', 
     function($scope, $http,){
 
+}]);
+
+app.controller('SingleController', 
+  ['$scope', '$http', '$routeParams',
+    function($scope, $http, $routeParams){
+      ctrl.listing_index = $routeParams.id;
+      ctrl.listing = null;
+
+      var promListing = $http.get("/data/search_results.json");
+      promListing.then(function(response){
+          ctrl.listing = response.data.search_results[ctrl.listing_index].listing;
+      });
 }]);
 
 app.controller('GameController', 
@@ -31,6 +44,7 @@ app.controller('GameController',
     var ctrl= this;
     ctrl.listings= null;
     ctrl.listing = null;
+    ctrl.listing_index = null;
     ctrl.map     = null;
     ctrl.marker = null;
 
@@ -76,6 +90,7 @@ app.controller('GameController',
 
     ctrl.randomListing = function(){
       var rand = Math.floor(Math.random()*ctrl.listings.length)
+      ctrl.listing_index  = rand;
       ctrl.listing = ctrl.listings[rand].listing;
     }
 

@@ -17,6 +17,15 @@
 <body>
 
 <div class="container">
+  <div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li class="menu-text">Site Title</li>
+      <li><a href="#!/">Home</a>
+    </ul>
+  </div>
+</div>
+
   <div ng-view></div>
 </div>
   
