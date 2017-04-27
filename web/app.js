@@ -1,5 +1,28 @@
-var app = angular.module("BnBApp", ["ngTouch", "mm.foundation", "ngMap"]);
+var app = angular.module("BnBApp", ["ngTouch", "mm.foundation", "ngMap","ngRoute"]);
 
+app.config(['$routeProvider', function($routeProvider){
+  $routeProvider.
+  when('/', {
+        templateUrl: 'templates/index.html',
+        controller: "FrontController",
+        controllerAs: 'ctrl'
+    }).
+    when('/game', {
+        templateUrl: 'templates/game.html',
+        controller: "GameController",
+        controllerAs: 'ctrl'
+    }).
+    when('/listing/{id}', {
+        templateUrl: 'templates/single.html',
+        controller: "SingleController",
+        controllerAs: 'ctrl'
+    })
+}]);
+app.controller('FrontController', 
+  ['$scope', '$http', 
+    function($scope, $http,){
+
+}]);
 
 app.controller('GameController', 
   ['$scope', '$http', 'NgMap', '$q', 
